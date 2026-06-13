@@ -1,9 +1,14 @@
 {
-    "name": "forca",
-	  "author": "SyntaxError <me@stxerr.dev> (https://www.stxerr.dev)",
-    "description": "Hangman game for Manybot.",
-    "version": "2.0.1",
-    "category": "games",
-    "service": false,
-    "dependencies": {}
+  "name": "forca",
+  "key": "synt-xerror/forca",
+  "author": {
+    "name": "SyntaxError",
+    "email": "me@stxerr.dev",
+    "website": "https://www.stxerr.dev"
+  },
+  "description": "Hangman game for Manybot.",
+  "version": "2.0.1",
+  "category": "games",
+  "service": false,
+  "dependencies": {}
 }
