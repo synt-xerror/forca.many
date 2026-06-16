@@ -6,6 +6,7 @@
   "stopCommandHelp": "encerra o jogo",
   "started": "Jogo da Forca iniciado!\n\nTema: *{{theme}}*\nPalavra: `{{word}}`\nVidas: {{lives}}\n\nDigite uma letra para adivinhar!",
   "stopped": "Jogo da Forca encerrado.",
+  "alreadyRunning": "*Já existe um jogo em andamento!*",
   "invalidCommand": "Subcomando *{{sub}}* não existe.\nUse",
   "or": "ou",
   "won": "Parabéns! Palavra completa: `{{word}}`",
