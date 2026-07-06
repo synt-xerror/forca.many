@@ -13,5 +13,6 @@
   "lost": "Game over! Word was: `{{word}}`",
   "status": "Word: `{{word}}`\nLives: {{lives}}",
   "correct": "Got the letter!",
-  "wrong": "Wrong letter!"
+  "wrong": "Wrong letter!",
+  "noGame": "No games in progress. Send `{{cmd}}` to start a new one."
 }

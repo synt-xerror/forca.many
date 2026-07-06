@@ -13,5 +13,6 @@
   "lost": "¡Fin del juego! La palabra era: `{{word}}`",
   "status": "Palabra: `{{word}}`\nVidas: {{lives}}",
   "correct": "¡Letra correcta!",
-  "wrong": "¡Letra incorrecta!"
+  "wrong": "¡Letra incorrecta!",
+  "noGame": "No hay ninguna partida en curso. Envía `{{cmd}}` para iniciar una nueva."
 }

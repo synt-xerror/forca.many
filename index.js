@@ -5,6 +5,7 @@
 
 import { readFile }                  from "node:fs/promises";
 import { dirname, join }             from "node:path";
+import { start } from "node:repl";
 import { fileURLToPath }             from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -54,7 +55,7 @@ export default async function (ctx) {
 
     if (sub === t("stopCommand")) {
       if (!activeGames.has(chatId)) {
-        await send.text(t("noGame"));
+        await send.text(t("noGame", { cmd: `${prefix}forca ${t("startCommand")}` }));
         return;
       }
       const game = activeGames.get(chatId);
