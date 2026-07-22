@@ -7,7 +7,7 @@
     "website": "https://www.stxerr.dev"
   },
   "description": "Hangman game for Manybot.",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "license": "MIT",
   "repo": "https://github.com/synt-xerror/forca.many",
   "category": "games",

@@ -3,19 +3,27 @@
  * Game state is stored internally per chat.
  */
 
-import { readFile }                  from "node:fs/promises";
-import { dirname, join }             from "node:path";
-import { start } from "node:repl";
-import { fileURLToPath }             from "node:url";
+import { readFile }      from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const words     = JSON.parse(await readFile(join(__dirname, "words.json"), "utf8"));
 
 const activeGames        = new Map();
 const activeParticipants = new Map();
+const lastWords           = new Map();
 
 const generateProgress = word => word.replace(/\p{L}/gu, "_");
 const normalize        = l => l.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+const pickWord = (WORDS, chatId) => {
+  if (WORDS.length === 1) return WORDS[0];
+  let choice;
+  do {
+    choice = WORDS[Math.floor(Math.random() * WORDS.length)];
+  } while (choice.word === lastWords.get(chatId));
+  return choice;
+};
 
 export default async function (ctx) {
   const { msg, chat, config, i18n, send } = ctx;
@@ -25,7 +33,7 @@ export default async function (ctx) {
 
   // ── Comando !forca ────────────────────────────────────────
   if (msg.command === "forca") {
-    const sub   = msg.args[0];
+    const sub   = (msg.args[0] ?? "").toLowerCase();
     const lang  = config.get("LANGUAGE");
     const WORDS = words[lang] ?? words.en;
 
@@ -44,12 +52,13 @@ export default async function (ctx) {
         return;
       }
 
-      const random   = WORDS[Math.floor(Math.random() * WORDS.length)];
-      const word     = random.word.toLowerCase();
-      activeGames.set(chatId, { word, theme: random.theme, lives: 6, progress: generateProgress(random.word), guessed: new Set() });
+      const random = pickWord(WORDS, chatId);
+      const word   = random.word.toLowerCase();
+      lastWords.set(chatId, random.word);
+      activeGames.set(chatId, { word, theme: random.theme, lives: 6, progress: generateProgress(word), guessed: new Set() });
       activeParticipants.set(chatId, new Map());
 
-      await send.text(t("started", { theme: random.theme, word: generateProgress(random.word), lives: 6 }));
+      await send.text(t("started", { theme: random.theme, word: generateProgress(word), lives: 6 }));
       return;
     }
 
@@ -69,22 +78,39 @@ export default async function (ctx) {
     return;
   }
 
-  // ── Tentativa de letra ────────────────────────────────────
+  // ── Tentativa de letra ou palavra ─────────────────────────
   const game = activeGames.get(chatId);
   if (!game) return;
 
-  const attempt = msg.body.trim().toLowerCase();
-  if (!/^\p{L}$/u.test(attempt)) return;
+  const attempt = (msg.body ?? "").trim().toLowerCase();
+  if (!attempt) return;
 
+  const isLetter = /^\p{L}$/u.test(attempt);
+  const isWord   = !isLetter && attempt.length > 1 && /^\p{L}+$/u.test(normalize(attempt));
+  if (!isLetter && !isWord) return;
+
+  const participants = activeParticipants.get(chatId);
+  if (!participants.has(msg.sender)) participants.set(msg.sender, msg.senderName);
+
+  // ── Palpite de palavra completa ───────────────────────────
+  if (isWord) {
+    if (normalize(attempt) === normalize(game.word)) {
+      const winners = [...participants.values()].join(", ") || t("nobody");
+      await msg.reply.text(t("won", { word: game.word, participants: winners }));
+      activeGames.delete(chatId);
+      activeParticipants.delete(chatId);
+      return;
+    }
+    return;
+  }
+
+  // ── Palpite de letra ──────────────────────────────────────
   const normalized = normalize(attempt);
   if (game.guessed.has(normalized)) {
     await msg.reply.text(t("alreadyGuessed", { letter: attempt }));
     return;
   }
   game.guessed.add(normalized);
-
-  const participants = activeParticipants.get(chatId);
-  if (!participants.has(msg.sender)) participants.set(msg.sender, msg.senderName);
 
   const newProgress = [...game.progress];
   let hit = false;

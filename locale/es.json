@@ -4,7 +4,7 @@
   "stopCommand": "detiene",
   "startCommandHelp": "inicia el juego",
   "stopCommandHelp": "detiene el juego",
-  "started": "¡Juego del Ahorcado iniciado!\n\nTema: *{{theme}}*\nPalabra: `{{word}}`\nVidas: {{lives}}\n\nEscribe una letra para adivinar!",
+  "started": "¡Juego del Ahorcado iniciado!\n\nTema: *{{theme}}*\nPalabra: `{{word}}`\nVidas: {{lives}}\n\n¡Escribe una letra o la palabra completa para adivinar!",
   "stopped": "Juego del Ahorcado terminado.",
   "alreadyRunning": "*Ya hay una partida en curso!*",
   "invalidCommand": "El subcomando *{{sub}}* no existe.\nUsa",

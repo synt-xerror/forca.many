@@ -4,7 +4,7 @@
   "stopCommand": "stop",
   "startCommandHelp": "starts the game",
   "stopCommandHelp": "stops the game",
-  "started": "Hangman game started!\n\nTheme: *{{theme}}*\nWord: `{{word}}`\nLives: {{lives}}\n\nType a letter to guess!",
+  "started": "Hangman game started!\n\nTheme: *{{theme}}*\nWord: `{{word}}`\nLives: {{lives}}\n\nType a letter or the whole word to guess!",
   "stopped": "Hangman game ended.",
   "alreadyRunning": "*There is already a game in progress!*",
   "invalidCommand": "Subcommand *{{sub}}* does not exist.\nUse",
