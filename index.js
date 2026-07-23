@@ -74,7 +74,7 @@ export default async function (ctx) {
       return;
     }
 
-    await send.text(`${t("invalidCommand", { sub })} \`${prefix}forca start\` ${t("or")} \`${prefix}forca stop\`.`);
+    await send.text(`${t("invalidCommand", { sub })} \`${prefix}forca ${t("startCommand")}\` ${t("or")} \`${prefix}forca ${t("stopCommand")}\`.`);
     return;
   }
 
