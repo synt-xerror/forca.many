@@ -164,7 +164,7 @@ export default async function (ctx) {
   }
 
   await msg.reply.text(
-    `${t("status", { word: game.progress, lives: game.lives })}\n` +
+    `${t("status", { word: game.progress, lives: game.lives, guessed: [...game.guessed].sort().join(", ") })}\n` +
     (hit ? t("correct") : t("wrong"))
   );
 }

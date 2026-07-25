@@ -11,9 +11,9 @@
   "or": "or",
   "won": "Congratulations! Complete word: `{{word}}`",
   "lost": "Game over! Word was: `{{word}}`",
-  "status": "Word: `{{word}}`\nLives: {{lives}}",
-  "correct": "Got the letter!",
-  "wrong": "Wrong letter!",
+  "status": "Word: `{{word}}`\nLives: {{lives}}\nUsed letters: {{guessed}}\n",
+  "correct": "✅ Got the letter!",
+  "wrong": "❌ Wrong letter!",
   "noGame": "No games in progress. Send `{{cmd}}` to start a new one.",
   "timeout": "⏱️ Time's up! No one played for a while, so the game ended. The word was: *{{word}}*",
   "alreadyGuessed": "You already tried the letter *{{letter}}*."
