@@ -72,7 +72,7 @@ export default async function (ctx) {
       return;
     }
 
-    if (sub === t("startCommand")) {
+    if (sub === t("startCommand") || sub === t("startCommandAlt")) {
       if (activeGames.has(chatId)) {
         await send.text(t("alreadyRunning"));
         return;
