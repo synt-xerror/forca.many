@@ -14,5 +14,7 @@
   "status": "Palabra: `{{word}}`\nVidas: {{lives}}",
   "correct": "¡Letra correcta!",
   "wrong": "¡Letra incorrecta!",
-  "noGame": "No hay ninguna partida en curso. Envía `{{cmd}}` para iniciar una nueva."
+  "noGame": "No hay ninguna partida en curso. Envía `{{cmd}}` para iniciar una nueva.",
+  "timeout": "⏱️ ¡Tiempo agotado! Nadie jugó por un rato, así que el juego terminó. La palabra era: *{{word}}*",
+  "alreadyGuessed": "Ya intentaste la letra *{{letter}}*."
 }

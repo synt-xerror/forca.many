@@ -14,5 +14,8 @@
   "status": "Word: `{{word}}`\nLives: {{lives}}",
   "correct": "Got the letter!",
   "wrong": "Wrong letter!",
-  "noGame": "No games in progress. Send `{{cmd}}` to start a new one."
-}
+  "noGame": "No games in progress. Send `{{cmd}}` to start a new one.",
+  "timeout": "⏱️ Time's up! No one played for a while, so the game ended. The word was: *{{word}}*",
+  "alreadyGuessed": "You already tried the letter *{{letter}}*."
+},
+
